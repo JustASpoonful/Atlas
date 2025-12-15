@@ -11,10 +11,10 @@
             /* Core Theme Variable - Default is Green */
             --theme-color: #30d158; 
             
-            --bg-glass: rgba(10, 10, 10, 0.8);
-            --border-glass: rgba(255, 255, 255, 0.08);
+            --bg-glass: rgba(20, 20, 20, 0.7); 
+            --border-glass: rgba(255, 255, 255, 0.15);
             --text-main: #ffffff;
-            --text-muted: rgba(255, 255, 255, 0.45);
+            --text-muted: rgba(255, 255, 255, 0.6);
             
             /* Static Accents */
             --accent-blue: #2997ff;
@@ -32,7 +32,7 @@
         }
 
         body {
-            background-color: #000;
+            background-color: #050505;
             font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text", Helvetica, sans-serif;
             color: var(--text-main);
             overflow-x: hidden;
@@ -70,7 +70,7 @@
         @keyframes fly { to { transform: translateX(120vw) translateY(20vh) rotate(10deg); } }
 
 
-        /* --- DARKER AURORA BOREALIS --- */
+        /* --- BRIGHTER AURORA BOREALIS --- */
         .ambient-bg {
             position: fixed;
             top: 0;
@@ -78,7 +78,7 @@
             width: 100vw;
             height: 100vh;
             z-index: -2;
-            background: #000000;
+            background: #050505;
             overflow: hidden;
         }
 
@@ -86,7 +86,7 @@
             position: absolute;
             border-radius: 50%;
             filter: blur(80px);
-            opacity: 0.25;
+            opacity: 0.4;
             mix-blend-mode: screen; 
             transition: background 1s ease;
         }
@@ -104,22 +104,22 @@
         .orb-2 {
             width: 120vw;
             height: 50vh;
-            background: radial-gradient(ellipse at center, #1a1a1a, transparent 70%);
+            background: radial-gradient(ellipse at center, #2a2a2a, transparent 70%);
             top: -5%;
             right: -20%;
             transform: rotate(5deg);
             animation: auroraWave2 25s infinite alternate ease-in-out;
-            opacity: 0.2;
+            opacity: 0.3;
         }
 
         .orb-3 {
             width: 100vw;
             height: 60vh;
-            background: radial-gradient(ellipse at center, #1e1e2e, transparent 70%);
+            background: radial-gradient(ellipse at center, #2e2e3e, transparent 70%);
             top: 10%;
             left: 0;
             animation: auroraWave3 15s infinite alternate ease-in-out;
-            opacity: 0.3;
+            opacity: 0.4;
         }
 
         @keyframes auroraWave1 {
@@ -127,13 +127,13 @@
             100% { transform: rotate(-5deg) translateY(10vh) scale(1.1); }
         }
         @keyframes auroraWave2 {
-            0% { transform: rotate(5deg) translateX(0) scale(1); opacity: 0.2; }
-            100% { transform: rotate(0deg) translateX(-10vw) scale(1.2); opacity: 0.3; }
+            0% { transform: rotate(5deg) translateX(0) scale(1); opacity: 0.3; }
+            100% { transform: rotate(0deg) translateX(-10vw) scale(1.2); opacity: 0.4; }
         }
         @keyframes auroraWave3 {
-            0% { transform: scale(1); opacity: 0.2; }
-            50% { transform: scale(1.2); opacity: 0.3; }
-            100% { transform: scale(1); opacity: 0.2; }
+            0% { transform: scale(1); opacity: 0.3; }
+            50% { transform: scale(1.2); opacity: 0.4; }
+            100% { transform: scale(1); opacity: 0.3; }
         }
 
         /* --- UI COMPONENTS --- */
@@ -143,7 +143,7 @@
             top: 24px;
             left: 50%;
             transform: translateX(-50%);
-            background: rgba(5, 5, 5, 0.85);
+            background: rgba(20, 20, 20, 0.85);
             backdrop-filter: blur(20px);
             -webkit-backdrop-filter: blur(20px);
             padding: 12px 24px;
@@ -199,7 +199,7 @@
             letter-spacing: -0.04em;
             line-height: 1;
             margin-bottom: 20px;
-            background: linear-gradient(180deg, #fff 0%, #777 100%);
+            background: linear-gradient(180deg, #fff 0%, #999 100%);
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
         }
@@ -231,8 +231,8 @@
             display: inline-flex;
             align-items: center;
             gap: 8px;
-            background: rgba(255, 255, 255, 0.03);
-            border: 1px solid rgba(255, 255, 255, 0.08);
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             padding: 6px 16px;
             border-radius: 20px;
             margin-bottom: 24px;
@@ -241,6 +241,14 @@
             font-weight: 500;
             transition: all 0.3s ease;
             cursor: pointer;
+        }
+
+        .status-badge i {
+            transition: transform 0.5s ease;
+        }
+        
+        .status-badge.loading i {
+            transform: rotate(360deg);
         }
 
         .dot {
@@ -254,6 +262,11 @@
         .status-badge.online .dot {
             background: var(--theme-color);
             box-shadow: 0 0 10px var(--theme-color);
+        }
+        
+        .status-badge.offline .dot {
+            background: #ff453a;
+            box-shadow: 0 0 10px #ff453a;
         }
 
         .cta-button {
@@ -282,7 +295,7 @@
         /* --- PREMIUM REWARDS SECTION --- */
         .rewards-section {
             justify-content: flex-start;
-            perspective: 1000px; /* For 3D Tilt */
+            perspective: 1000px;
         }
 
         .section-header {
@@ -294,7 +307,7 @@
             display: flex;
             gap: 30px;
             overflow-x: auto;
-            padding: 40px 5%; /* Increased padding for hover growth */
+            padding: 40px 5%;
             padding-bottom: 60px;
             scroll-snap-type: x mandatory;
             -webkit-overflow-scrolling: touch;
@@ -308,23 +321,22 @@
             min-width: 320px;
             width: 85vw;
             max-width: 380px;
-            aspect-ratio: 4/5.5; /* Taller, sleeker */
-            background: rgba(20, 20, 20, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            aspect-ratio: 4/5.5;
+            background: rgba(30, 30, 30, 0.6);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             border-radius: 32px;
             padding: 40px;
             display: flex;
             flex-direction: column;
             justify-content: space-between;
             scroll-snap-align: center;
-            transition: transform 0.1s ease-out; /* Super smooth tilt */
+            transition: transform 0.1s ease-out;
             position: relative;
             overflow: hidden;
             backdrop-filter: blur(20px);
             cursor: default;
         }
 
-        /* The Spotlight Effect Element */
         .reward-card::before {
             content: '';
             position: absolute;
@@ -336,11 +348,8 @@
             pointer-events: none;
         }
 
-        .reward-card:hover::before {
-            opacity: 1;
-        }
+        .reward-card:hover::before { opacity: 1; }
 
-        /* Inner Glow for Borders */
         .reward-card::after {
             content: '';
             position: absolute;
@@ -355,14 +364,11 @@
             -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
             mask-composite: exclude;
             -webkit-mask-composite: xor;
-            padding: 1px; /* The border width */
+            padding: 1px;
         }
         
-        .reward-card:hover::after {
-            opacity: 1;
-        }
+        .reward-card:hover::after { opacity: 1; }
 
-        /* Content Layout */
         .card-content {
             position: relative;
             z-index: 2;
@@ -380,7 +386,6 @@
             position: relative;
         }
 
-        /* Premium Icons */
         .reward-icon {
             font-size: 100px;
             filter: drop-shadow(0 10px 30px rgba(0,0,0,0.5));
@@ -391,9 +396,7 @@
             transform: scale(1.1) translateY(-10px);
         }
 
-        .reward-details {
-            margin-top: auto;
-        }
+        .reward-details { margin-top: auto; }
 
         .reward-label {
             text-transform: uppercase;
@@ -431,10 +434,8 @@
             color: #fff;
         }
 
-        /* --- COMMUNITY HUB SECTION (New) --- */
-        .community-section {
-            padding: 60px 5%;
-        }
+        /* --- COMMUNITY HUB SECTION --- */
+        .community-section { padding: 60px 5%; }
 
         .hub-grid {
             display: grid;
@@ -445,7 +446,7 @@
         }
 
         .hub-card {
-            background: rgba(20, 20, 20, 0.4);
+            background: rgba(30, 30, 30, 0.4);
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 24px;
             padding: 30px;
@@ -458,7 +459,7 @@
         }
 
         .hub-card:hover {
-            background: rgba(40, 40, 40, 0.6);
+            background: rgba(50, 50, 50, 0.6);
             transform: translateY(-5px);
             border-color: var(--theme-color);
         }
@@ -470,9 +471,7 @@
             transition: color 0.3s;
         }
 
-        .hub-card:hover .hub-icon {
-            color: var(--theme-color);
-        }
+        .hub-card:hover .hub-icon { color: var(--theme-color); }
 
         /* --- TICKET SECTION --- */
         .join-section {
@@ -485,8 +484,8 @@
         .server-ticket {
             width: 100%;
             max-width: 600px;
-            background: rgba(15, 15, 15, 0.6);
-            border: 1px solid rgba(255, 255, 255, 0.1);
+            background: rgba(20, 20, 20, 0.8);
+            border: 1px solid rgba(255, 255, 255, 0.15);
             backdrop-filter: blur(24px);
             -webkit-backdrop-filter: blur(24px);
             border-radius: 24px;
@@ -504,7 +503,7 @@
             width: 100%;
             height: 4px;
             background: var(--theme-color);
-            box-shadow: 0 0 20px var(--theme-color);
+            box-shadow: 0 0 40px var(--theme-color);
         }
 
         .ticket-label {
@@ -524,11 +523,10 @@
             letter-spacing: -0.5px;
             cursor: pointer;
             transition: color 0.2s;
+            text-shadow: 0 0 10px rgba(0,0,0,0.5);
         }
 
-        .ip-large:hover {
-            color: var(--theme-color);
-        }
+        .ip-large:hover { color: var(--theme-color); }
 
         .copy-btn-large {
             display: inline-flex;
@@ -548,12 +546,9 @@
             transition: all 0.2s;
         }
 
-        .copy-btn-large:hover {
-            transform: scale(1.02);
-            background: #f5f5f7;
-        }
+        .copy-btn-large:hover { transform: scale(1.02); background: #f5f5f7; }
 
-        /* --- SETTINGS/INFO MODAL SYSTEM --- */
+        /* --- SETTINGS/INFO/AI MODAL SYSTEM --- */
         .modal-overlay {
             position: fixed;
             top: 0;
@@ -571,13 +566,10 @@
             transition: opacity 0.3s ease;
         }
 
-        .modal-overlay.open {
-            opacity: 1;
-            pointer-events: all;
-        }
+        .modal-overlay.open { opacity: 1; pointer-events: all; }
 
         .settings-card {
-            background: #111;
+            background: #151515;
             border: 1px solid #333;
             padding: 30px;
             border-radius: 24px;
@@ -588,13 +580,11 @@
             max-height: 85vh;
             overflow-y: auto;
             position: relative;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.8);
         }
 
-        .modal-overlay.open .settings-card {
-            transform: scale(1);
-        }
+        .modal-overlay.open .settings-card { transform: scale(1); }
         
-        /* Iframe Container for Maps/Game */
         .iframe-container {
             width: 100%;
             height: 400px;
@@ -604,11 +594,7 @@
             margin-top: 10px;
         }
         
-        .iframe-container iframe {
-            width: 100%;
-            height: 100%;
-            border: none;
-        }
+        .iframe-container iframe { width: 100%; height: 100%; border: none; }
 
         .input-group { margin-bottom: 20px; }
         .input-group label {
@@ -622,12 +608,7 @@
         }
         .name-input:focus { border-color: var(--theme-color); }
 
-        /* Theme Grid */
-        .color-options {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 10px;
-        }
+        .color-options { display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px; }
 
         .color-btn {
             height: 40px;
@@ -650,24 +631,108 @@
             padding: 12px; border-radius: 12px; font-weight: 600; cursor: pointer; margin-top: 10px;
         }
 
-        /* Info Hub List */
-        .info-list li {
-            margin-bottom: 8px; color: #ccc; list-style: none; display: flex; gap: 10px; font-size: 14px;
-        }
+        .info-list li { margin-bottom: 8px; color: #ccc; list-style: none; display: flex; gap: 10px; font-size: 14px; }
         .info-list li:before { content: "•"; color: var(--theme-color); }
         h3 { color: var(--theme-color); margin-bottom: 10px; font-size: 18px; }
 
-        /* --- ANIMATIONS --- */
-        .reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 1s var(--ease-apple);
+        /* --- AI CHAT STYLES --- */
+        .chat-container {
+            display: flex;
+            flex-direction: column;
+            height: 400px;
+            gap: 15px;
+        }
+        
+        .chat-history {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            padding-right: 5px;
+        }
+        
+        .chat-message {
+            max-width: 80%;
+            padding: 10px 14px;
+            border-radius: 16px;
+            font-size: 14px;
+            line-height: 1.4;
+        }
+        
+        .chat-message.user {
+            align-self: flex-end;
+            background: var(--theme-color);
+            color: #000;
+            border-bottom-right-radius: 4px;
+        }
+        
+        .chat-message.ai {
+            align-self: flex-start;
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border-bottom-left-radius: 4px;
+        }
+        
+        .chat-input-area {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .chat-input {
+            flex: 1;
+            background: rgba(0,0,0,0.3);
+            border: 1px solid rgba(255,255,255,0.1);
+            padding: 10px;
+            border-radius: 12px;
+            color: #fff;
+            outline: none;
+        }
+        
+        .chat-input:focus { border-color: var(--theme-color); }
+        
+        .chat-send-btn {
+            background: var(--theme-color);
+            color: #000;
+            border: none;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
         }
 
-        .reveal.active {
-            opacity: 1;
-            transform: translateY(0);
+        .typing-indicator {
+            display: none;
+            gap: 4px;
+            padding: 10px 14px;
+            background: rgba(255,255,255,0.05);
+            border-radius: 16px;
+            align-self: flex-start;
+            width: fit-content;
         }
+        
+        .typing-dot {
+            width: 6px;
+            height: 6px;
+            background: #fff;
+            border-radius: 50%;
+            animation: bounce 1.4s infinite ease-in-out both;
+        }
+        
+        .typing-dot:nth-child(1) { animation-delay: -0.32s; }
+        .typing-dot:nth-child(2) { animation-delay: -0.16s; }
+        
+        @keyframes bounce {
+            0%, 80%, 100% { transform: scale(0); }
+            40% { transform: scale(1); }
+        }
+
+        /* --- ANIMATIONS --- */
+        .reveal { opacity: 0; transform: translateY(30px); transition: all 1s var(--ease-apple); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
 
         @media (min-width: 768px) {
             .reward-card { width: 30vw; min-width: 350px; }
@@ -683,10 +748,8 @@
         <div class="orb orb-3"></div>
     </div>
     
-    <!-- FX Layer for snow/bats -->
     <div id="fx-layer"></div>
 
-    <!-- Navigation with Settings Toggle -->
     <nav class="nav-island">
         <a href="#" class="nav-logo">Bradley</a>
         <a href="#rewards">Rewards</a>
@@ -694,6 +757,9 @@
         
         <div style="width: 1px; height: 16px; background: rgba(255,255,255,0.2); margin: 0 4px;"></div>
         
+        <button onclick="openModal('aiModal')" title="Bradley AI ✨">
+            <i class="ph-fill ph-sparkle"></i>
+        </button>
         <button onclick="openModal('infoModal')" title="Info Hub">
             <i class="ph-bold ph-info"></i>
         </button>
@@ -702,35 +768,57 @@
         </button>
     </nav>
 
+    <!-- Bradley AI Modal -->
+    <div class="modal-overlay" id="aiModal" onclick="closeModal(event, 'aiModal')">
+        <div class="settings-card" onclick="event.stopPropagation()">
+            <h2 style="margin-bottom: 20px; display: flex; align-items: center; gap: 10px;">
+                <i class="ph-fill ph-sparkle" style="color: var(--theme-color);"></i> Bradley AI
+            </h2>
+            
+            <div class="chat-container">
+                <div class="chat-history" id="chatHistory">
+                    <div class="chat-message ai">
+                        Hello! I'm your Bradley SMP assistant. Ask me about rules, build ideas, or server lore! ✨
+                    </div>
+                </div>
+                
+                <div class="typing-indicator" id="typingIndicator">
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                    <div class="typing-dot"></div>
+                </div>
+
+                <div class="chat-input-area">
+                    <input type="text" id="chatInput" class="chat-input" placeholder="Ask Bradley AI..." onkeypress="handleEnter(event)">
+                    <button class="chat-send-btn" onclick="chatWithGemini()">
+                        <i class="ph-bold ph-paper-plane-right"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <!-- Settings Modal -->
     <div class="modal-overlay" id="settingsModal" onclick="closeModal(event, 'settingsModal')">
         <div class="settings-card" onclick="event.stopPropagation()">
             <h2 style="margin-bottom: 20px;">Personalize</h2>
-            
             <div class="input-group">
                 <label>Your Name</label>
                 <input type="text" id="usernameInput" class="name-input" placeholder="Steve">
             </div>
-
             <div class="input-group">
                 <label>Theme</label>
                 <div class="color-options">
-                    <!-- Standard -->
                     <button class="color-btn" style="background: #30d158;" onclick="selectTheme('green', this)"></button>
                     <button class="color-btn" style="background: #2997ff;" onclick="selectTheme('blue', this)"></button>
                     <button class="color-btn" style="background: #bf5af2;" onclick="selectTheme('purple', this)"></button>
                     <button class="color-btn" style="background: #ff9f0a;" onclick="selectTheme('orange', this)"></button>
-                    
-                    <!-- Multicolor -->
                     <button class="color-btn" style="background: linear-gradient(135deg, #ff00cc, #3333ff);" onclick="selectTheme('cyber', this)"></button>
                     <button class="color-btn" style="background: linear-gradient(135deg, #ff9966, #ff5e62);" onclick="selectTheme('sunset', this)"></button>
-
-                    <!-- Seasonal -->
                     <button class="color-btn" style="background: linear-gradient(135deg, #d42426, #165b33);" onclick="selectTheme('christmas', this)"><span>XMAS</span></button>
                     <button class="color-btn" style="background: linear-gradient(135deg, #ff8c00, #4a0080);" onclick="selectTheme('halloween', this)"><span>SPOOKY</span></button>
                 </div>
             </div>
-
             <button class="save-btn" onclick="savePreferences()">Save Changes</button>
         </div>
     </div>
@@ -739,32 +827,21 @@
     <div class="modal-overlay" id="infoModal" onclick="closeModal(event, 'infoModal')">
         <div class="settings-card" onclick="event.stopPropagation()">
             <h2 style="margin-bottom: 20px;">Info Hub</h2>
-            
             <div style="margin-bottom: 20px;">
                 <h3><i class="ph-bold ph-scroll"></i> Rules</h3>
                 <ul class="info-list">
                     <li>No Griefing claimed land</li>
                     <li>Respect all players & staff</li>
                     <li>No hacked clients</li>
-                    <li>PvP allowed only in Wilderness</li>
                 </ul>
             </div>
-
             <div style="margin-bottom: 20px;">
                 <h3><i class="ph-bold ph-terminal-window"></i> Commands</h3>
                 <ul class="info-list">
                     <li>/spawn - Return to hub</li>
                     <li>/sethome [name] - Set base location</li>
                     <li>/tpa [player] - Request teleport</li>
-                    <li>/vote - Vote for rewards</li>
                 </ul>
-            </div>
-
-            <div>
-                <h3><i class="ph-bold ph-crown"></i> Ranks</h3>
-                <p style="color: #888; font-size: 14px; line-height: 1.5;">
-                    Member, <span style="color:var(--accent-blue)">VIP</span>, <span style="color:var(--accent-purple)">MVP</span>, and <span style="color:var(--accent-green)">Legend</span> available in store.
-                </p>
             </div>
         </div>
     </div>
@@ -773,15 +850,9 @@
     <div class="modal-overlay" id="mapModal" onclick="closeModal(event, 'mapModal')">
         <div class="settings-card" style="max-width: 800px; width: 95%;" onclick="event.stopPropagation()">
             <h2 style="margin-bottom: 10px;">Live World Map</h2>
-            <p style="color: #888; font-size: 14px; margin-bottom: 20px;">View the world from above in real-time.</p>
-            
             <div class="iframe-container">
-                <!-- REPLACE 'about:blank' with your Dynmap/BlueMap URL (e.g. http://your-ip:8123) -->
                 <iframe src="about:blank" title="Live Map"></iframe>
-                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #666; pointer-events: none; z-index: -1;">Map Link Not Set</div>
             </div>
-            
-            <button class="save-btn" onclick="closeModal(null, 'mapModal')" style="margin-top: 20px;">Close Map</button>
         </div>
     </div>
     
@@ -789,19 +860,14 @@
     <div class="modal-overlay" id="gameModal" onclick="closeModal(event, 'gameModal')">
         <div class="settings-card" style="max-width: 900px; width: 95%; height: 80vh;" onclick="event.stopPropagation()">
             <h2 style="margin-bottom: 10px;">Play Now</h2>
-            <p style="color: #888; font-size: 14px; margin-bottom: 20px;">Play Bradley SMP directly in your browser.</p>
-            
-            <div class="iframe-container" style="height: calc(100% - 100px);">
-                <!-- REPLACE 'about:blank' with your Eaglercraft Client URL -->
+            <div class="iframe-container" style="height: calc(100% - 60px);">
                 <iframe src="about:blank" title="Web Client"></iframe>
-                <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); color: #666; pointer-events: none; z-index: -1;">Client Link Not Set</div>
             </div>
         </div>
     </div>
 
     <section class="hero-section">
         <div class="reveal active">
-            <!-- Personalized Greeting -->
             <div id="greeting" class="greeting-text"></div>
 
             <div id="status-badge" class="status-badge" onclick="checkServerStatus()" title="Click to Refresh">
@@ -816,29 +882,22 @@
         </div>
     </section>
     
-    <!-- Community Hub (Connection Options) -->
     <section class="community-section">
         <div class="section-header reveal">
             <p style="color: var(--text-muted); font-weight: 600; margin-bottom: 10px; text-transform: uppercase;">Connect</p>
             <h2>Community Hub</h2>
         </div>
-        
         <div class="hub-grid reveal">
-            <!-- Map Card -->
             <div class="hub-card" onclick="openModal('mapModal')">
                 <i class="ph ph-map-trifold hub-icon"></i>
                 <h3>Live Map</h3>
                 <p style="color: #888; font-size: 14px;">View the world from space.</p>
             </div>
-            
-            <!-- Discord Card -->
             <div class="hub-card" onclick="window.open('https://discord.gg/example', '_blank')">
                 <i class="ph ph-discord-logo hub-icon"></i>
                 <h3>Discord</h3>
                 <p style="color: #888; font-size: 14px;">Join the conversation.</p>
             </div>
-            
-            <!-- Play Now Card -->
             <div class="hub-card" onclick="openModal('gameModal')">
                 <i class="ph ph-game-controller hub-icon"></i>
                 <h3>Web Client</h3>
@@ -847,7 +906,6 @@
         </div>
     </section>
 
-    <!-- PREMIUM REWARDS -->
     <section id="rewards" class="rewards-section">
         <div class="section-header reveal">
             <p style="color: var(--accent-purple); font-weight: 600; margin-bottom: 10px;">SEASON 1 PRIZES</p>
@@ -855,11 +913,9 @@
         </div>
 
         <div class="carousel-container reveal">
-            <!-- Card 1: Watch -->
             <div class="reward-card" onmousemove="handleMove(event, this)">
                 <div class="card-content">
                     <div class="reward-image-area">
-                        <!-- Simulated 3D Icon -->
                         <i class="ph-fill ph-watch reward-icon" style="color: var(--accent-blue);"></i>
                     </div>
                     <div class="reward-details">
@@ -870,8 +926,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Card 2: Earbuds -->
             <div class="reward-card" onmousemove="handleMove(event, this)">
                 <div class="card-content">
                     <div class="reward-image-area">
@@ -885,8 +939,6 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Card 3: New Mouse -->
             <div class="reward-card" onmousemove="handleMove(event, this)">
                 <div class="card-content">
                     <div class="reward-image-area">
@@ -900,7 +952,6 @@
                     </div>
                 </div>
             </div>
-
             <div style="min-width: 5vw;"></div>
         </div>
     </section>
@@ -908,13 +959,10 @@
     <section id="join" class="join-section">
         <div class="reveal">
             <h2 style="font-size: 2.5rem; margin-bottom: 40px;">Your ticket to the world.</h2>
-            
             <div class="server-ticket">
                 <div class="ticket-glow"></div>
-                
                 <div class="ticket-label">SERVER ADDRESS</div>
-                <div class="ip-large" id="ip-text">Leviathon.eagler.host</div>
-                
+                <div class="ip-large" id="ip-text">bradleysmp.eagler.host</div>
                 <div style="display: flex; gap: 20px; justify-content: center; margin-bottom: 30px;">
                     <div style="text-align: center;">
                         <div style="color: var(--text-muted); font-size: 12px; margin-bottom: 4px;">VERSION</div>
@@ -926,13 +974,11 @@
                         <div style="font-weight: 600;">Eaglercraft</div>
                     </div>
                 </div>
-
                 <button class="copy-btn-large" onclick="copyIP(this)">
                     <i class="ph-bold ph-copy"></i>
                     <span id="btn-text">Copy Address</span>
                 </button>
             </div>
-            
             <div style="margin-top: 40px; color: var(--text-muted); font-size: 0.9rem;">
                 Don't have a launcher? <a href="#" style="color: #fff;" onclick="openModal('gameModal')">Play in Browser</a>
             </div>
@@ -940,7 +986,6 @@
     </section>
 
     <script>
-        // --- DATA & THEMES ---
         const themeData = {
             green: { color: '#30d158', orbs: ['#30d158', '#1a1a1a', '#1e1e2e'] },
             blue: { color: '#2997ff', orbs: ['#2997ff', '#0040dd', '#111'] },
@@ -951,100 +996,69 @@
             christmas: { color: '#d42426', orbs: ['#d42426', '#165b33', '#fff'], fx: 'snow' },
             halloween: { color: '#ff8c00', orbs: ['#ff8c00', '#4a0080', '#000'], fx: 'bats' }
         };
-
         let tempTheme = 'green';
         let fxInterval = null;
 
-        // --- INIT ---
         window.addEventListener('load', () => {
             const savedName = localStorage.getItem('bradleyName');
             const savedTheme = localStorage.getItem('bradleyTheme');
-
             if (savedName) {
                 document.getElementById('greeting').innerText = `WELCOME BACK, ${savedName}`;
                 document.getElementById('usernameInput').value = savedName;
             }
-
             if (savedTheme && themeData[savedTheme]) {
                 applyTheme(savedTheme);
                 tempTheme = savedTheme;
-            } else {
-                applyTheme('green');
-            }
-
+            } else { applyTheme('green'); }
             checkServerStatus();
             initScroll();
         });
 
-        // --- 3D TILT EFFECT FOR CARDS ---
         function handleMove(e, card) {
             const rect = card.getBoundingClientRect();
             const x = e.clientX - rect.left;
             const y = e.clientY - rect.top;
-
-            // Set Mouse Position for Spotlight Gradient
             card.style.setProperty('--mouse-x', `${x}px`);
             card.style.setProperty('--mouse-y', `${y}px`);
-
-            // Calculate Tilt
             const centerX = rect.width / 2;
             const centerY = rect.height / 2;
-            const rotateX = ((y - centerY) / centerY) * -5; // Max 5deg tilt
+            const rotateX = ((y - centerY) / centerY) * -5; 
             const rotateY = ((x - centerX) / centerX) * 5;
-
             card.style.transform = `perspective(1000px) rotateX(${rotateX}deg) rotateY(${rotateY}deg)`;
         }
-
-        // Reset tilt on mouse leave
         document.querySelectorAll('.reward-card').forEach(card => {
             card.addEventListener('mouseleave', () => {
                 card.style.transform = 'perspective(1000px) rotateX(0) rotateY(0)';
             });
         });
 
-
-        // --- THEME ENGINE ---
         function selectTheme(key, btn) {
             tempTheme = key;
             document.querySelectorAll('.color-btn').forEach(b => b.classList.remove('active'));
             btn.classList.add('active');
         }
-
         function applyTheme(key) {
             const t = themeData[key];
             const root = document.documentElement;
             const fxLayer = document.getElementById('fx-layer');
             const orbs = document.querySelectorAll('.orb');
-
-            // Set main color
             root.style.setProperty('--theme-color', t.color);
-
-            // Set Orbs
             orbs[0].style.background = `radial-gradient(ellipse at center, ${t.orbs[0]}, transparent 70%)`;
             orbs[1].style.background = `radial-gradient(ellipse at center, ${t.orbs[1]}, transparent 70%)`;
             if(t.orbs[2]) orbs[2].style.background = `radial-gradient(ellipse at center, ${t.orbs[2]}, transparent 70%)`;
-
-            // Reset FX
             fxLayer.innerHTML = '';
             if (fxInterval) clearInterval(fxInterval);
-
-            // Apply FX
             if (t.fx === 'snow') fxInterval = setInterval(createSnowflake, 200);
             if (t.fx === 'bats') fxInterval = setInterval(createBat, 800);
         }
-
         function savePreferences() {
             const name = document.getElementById('usernameInput').value;
             localStorage.setItem('bradleyName', name);
             document.getElementById('greeting').innerText = name ? `WELCOME BACK, ${name}` : '';
-
             localStorage.setItem('bradleyTheme', tempTheme);
             applyTheme(tempTheme);
-            
             closeModal(null, 'settingsModal');
         }
-
-        // --- FX LOGIC ---
         function createSnowflake() {
             const fx = document.getElementById('fx-layer');
             const flake = document.createElement('div');
@@ -1056,7 +1070,6 @@
             fx.appendChild(flake);
             setTimeout(() => flake.remove(), 5000);
         }
-
         function createBat() {
             const fx = document.getElementById('fx-layer');
             const bat = document.createElement('div');
@@ -1068,52 +1081,65 @@
             fx.appendChild(bat);
             setTimeout(() => bat.remove(), 8000);
         }
-
-        // --- MODAL SYSTEM ---
-        function openModal(id) {
-            document.getElementById(id).classList.add('open');
-        }
-
+        function openModal(id) { document.getElementById(id).classList.add('open'); }
         function closeModal(e, id) {
-            if (!e || e.target.id === id || e.target.classList.contains('close-btn')) {
+            if (!e || e.target.id === id || e.target.classList.contains('close-btn') || e.target.classList.contains('save-btn')) {
                 document.getElementById(id).classList.remove('open');
             }
         }
-
-        // --- SERVER ---
-        const serverIp = "Leviathon.eagler.host"; 
+        
+        // --- FIXED STATUS LOGIC ---
+        const serverIp = "bradleysmp.eagler.host"; 
         async function checkServerStatus() {
             const playerText = document.getElementById('player-count');
             const statusBadge = document.getElementById('status-badge');
             
+            // Show loading state
+            statusBadge.classList.add('loading');
             playerText.innerText = "Checking...";
+            
             try {
+                // Primary check
                 const response = await fetch(`https://api.mcsrvstat.us/3/${serverIp}?t=${new Date().getTime()}`);
                 const data = await response.json();
+                
+                statusBadge.classList.remove('loading');
+
                 if (data.online) {
                     statusBadge.classList.add('online');
-                    playerText.innerText = data.players.online === 0 ? "Online / 0 Players" : `${data.players.online} Players Online`;
+                    statusBadge.classList.remove('offline');
+                    
+                    // Simple, honest display of what the API sees
+                    playerText.innerText = `${data.players.online} Players Online`;
                 } else {
+                    // Fallback check (for Eagler weirdness) if first fails
+                    // This is a dummy fallback check, usually we'd call another API
+                    statusBadge.classList.add('offline');
                     statusBadge.classList.remove('online');
                     playerText.innerText = `Server Offline`;
                 }
             } catch {
+                statusBadge.classList.remove('loading');
                 playerText.innerText = `Status Unknown`;
             }
         }
-
-        // --- COPY ---
+        
+        // FIXED COPY FUNCTION
         function copyIP(btn) {
             navigator.clipboard.writeText(serverIp);
-            const originalText = "Copy Address";
             const btnText = document.getElementById('btn-text');
+            const originalText = btnText.innerText;
             
-            // If it's the large ticket button
             if(btnText) {
                 const theme = getComputedStyle(document.documentElement).getPropertyValue('--theme-color');
+                
+                // Visual Change
                 btn.style.background = theme;
                 btn.style.color = "#fff";
+                
+                // Only change the span text, keep the icon
                 btnText.innerText = "Copied!";
+                
                 setTimeout(() => {
                     btn.style.background = "#fff";
                     btn.style.color = "#000";
@@ -1122,7 +1148,6 @@
             }
         }
 
-        // --- SCROLL ---
         function initScroll() {
             window.addEventListener("scroll", () => {
                 var reveals = document.querySelectorAll(".reveal");
@@ -1134,6 +1159,61 @@
             });
             window.dispatchEvent(new Event('scroll'));
         }
+
+        /* --- GEMINI AI LOGIC --- */
+        const apiKey = ""; 
+        const systemPrompt = "You are Bradley AI, the helpful assistant for Bradley SMP. Server IP: bradleysmp.eagler.host. Version: 1.12.2. Rules: No Griefing, Respect everyone, No hacks, PvP in wilderness. Commands: /spawn, /sethome, /tpa, /vote. Ranks: Member, VIP, MVP, Legend. Be concise and friendly.";
+
+        function handleEnter(e) {
+            if (e.key === 'Enter') chatWithGemini();
+        }
+
+        async function chatWithGemini() {
+            const input = document.getElementById('chatInput');
+            const message = input.value.trim();
+            if (!message) return;
+
+            // 1. Add User Message
+            addMessage(message, 'user');
+            input.value = '';
+            
+            // 2. Show Loading
+            const indicator = document.getElementById('typingIndicator');
+            indicator.style.display = 'flex';
+            
+            // 3. Call API
+            try {
+                const response = await fetch(`https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash-preview-09-2025:generateContent?key=${apiKey}`, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify({
+                        contents: [{ parts: [{ text: message }] }],
+                        systemInstruction: { parts: [{ text: systemPrompt }] }
+                    })
+                });
+                
+                const data = await response.json();
+                const aiResponse = data.candidates?.[0]?.content?.parts?.[0]?.text || "Sorry, I couldn't connect to the AI network.";
+                
+                // 4. Add AI Message
+                indicator.style.display = 'none';
+                addMessage(aiResponse, 'ai');
+                
+            } catch (error) {
+                indicator.style.display = 'none';
+                addMessage("Connection error. Please try again.", 'ai');
+                console.error(error);
+            }
+        }
+
+        function addMessage(text, sender) {
+            const history = document.getElementById('chatHistory');
+            const msgDiv = document.createElement('div');
+            msgDiv.className = `chat-message ${sender}`;
+            msgDiv.innerText = text;
+            history.appendChild(msgDiv);
+            history.scrollTop = history.scrollHeight;
+        }
     </script>
 </body>
-  </html>
+    </html>
