@@ -3,441 +3,399 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Eaglercraft 1.12.2 Launcher</title>
+    <title>Eaglercraft 1.12.2 - Immersive Launcher</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
+        :root {
+            --island-bg: rgba(10, 10, 10, 0.9);
+            --island-border: rgba(255, 255, 255, 0.1);
+            --accent-blue: #63b3ed;
+            --accent-green: #68d391;
+            --accent-yellow: #ecc94b;
+        }
+
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
         }
-        
-        body {
-            background: linear-gradient(135deg, #1a1f2e 0%, #2d3748 100%);
-            color: #e2e8f0;
-            min-height: 100vh;
-            padding: 20px;
-        }
-        
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 20px;
-        }
-        
-        header {
-            text-align: center;
-            margin-bottom: 30px;
-            padding: 20px;
-            background-color: rgba(0, 0, 0, 0.3);
-            border-radius: 15px;
-            border: 1px solid #4a5568;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
-        }
-        
-        h1 {
-            font-size: 2.8rem;
-            margin-bottom: 10px;
-            color: #63b3ed;
-            text-shadow: 0 2px 5px rgba(0, 0, 0, 0.5);
-        }
-        
-        h1 i {
-            margin-right: 15px;
-            color: #68d391;
-        }
-        
-        .subtitle {
-            font-size: 1.2rem;
-            color: #a0aec0;
-            margin-bottom: 20px;
-        }
-        
-        .launcher-card {
-            background-color: rgba(26, 32, 44, 0.85);
-            border-radius: 15px;
-            padding: 25px;
-            box-shadow: 0 15px 35px rgba(0, 0, 0, 0.4);
-            border: 1px solid #4a5568;
-            margin-bottom: 25px;
-        }
-        
-        .controls {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 15px;
-            margin-bottom: 25px;
-        }
-        
-        .btn {
-            padding: 14px 24px;
-            border: none;
-            border-radius: 10px;
-            font-size: 1.1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 10px;
-            flex: 1;
-            min-width: 200px;
-        }
-        
-        .btn-launch {
-            background: linear-gradient(to right, #38a169, #68d391);
-            color: white;
-        }
-        
-        .btn-launch:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 15px rgba(104, 211, 145, 0.4);
-        }
-        
-        .btn-fullscreen {
-            background: linear-gradient(to right, #3182ce, #63b3ed);
-            color: white;
-        }
-        
-        .btn-fullscreen:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 15px rgba(99, 179, 237, 0.4);
-        }
-        
-        .btn-refresh {
-            background: linear-gradient(to right, #d69e2e, #ecc94b);
-            color: white;
-        }
-        
-        .btn-refresh:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 7px 15px rgba(236, 201, 75, 0.4);
-        }
-        
-        .game-container {
+
+        body, html {
             width: 100%;
-            border-radius: 10px;
+            height: 100%;
             overflow: hidden;
-            border: 2px solid #4a5568;
             background-color: #000;
-            position: relative;
-            min-height: 600px;
         }
-        
+
+        /* Fullscreen Game Frame */
         .game-frame {
-            width: 100%;
-            height: 600px;
-            border: none;
-            display: block;
-        }
-        
-        .status-bar {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            background-color: rgba(0, 0, 0, 0.4);
-            padding: 12px 20px;
-            border-radius: 10px;
-            margin-top: 20px;
-            flex-wrap: wrap;
-            gap: 10px;
-        }
-        
-        .status-item {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .status-icon {
-            font-size: 1.5rem;
-        }
-        
-        .online {
-            color: #68d391;
-        }
-        
-        .offline {
-            color: #fc8181;
-        }
-        
-        .loading {
-            color: #ecc94b;
-        }
-        
-        .instructions {
-            margin-top: 30px;
-            padding: 20px;
-            background-color: rgba(45, 55, 72, 0.7);
-            border-radius: 10px;
-            border-left: 5px solid #63b3ed;
-        }
-        
-        .instructions h3 {
-            margin-bottom: 15px;
-            color: #63b3ed;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        
-        .instructions ul {
-            padding-left: 20px;
-            line-height: 1.6;
-        }
-        
-        .instructions li {
-            margin-bottom: 10px;
-        }
-        
-        .loader {
-            display: none;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            text-align: center;
-            z-index: 10;
-        }
-        
-        .spinner {
-            border: 8px solid rgba(99, 179, 237, 0.2);
-            border-top: 8px solid #63b3ed;
-            border-radius: 50%;
-            width: 80px;
-            height: 80px;
-            animation: spin 1.5s linear infinite;
-            margin: 0 auto 20px;
-        }
-        
-        @keyframes spin {
-            0% { transform: rotate(0deg); }
-            100% { transform: rotate(360deg); }
-        }
-        
-        .fullscreen-active .game-container {
-            position: fixed;
-            top: 0;
-            left: 0;
             width: 100vw;
             height: 100vh;
-            z-index: 1000;
-            border-radius: 0;
             border: none;
+            display: block;
+            z-index: 1;
+            background-color: #000;
         }
-        
-        .fullscreen-active .game-frame {
-            height: 100vh;
+
+        /* Central Launch Hub */
+        #centralHub {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 100;
+            background: radial-gradient(circle, rgba(26,32,44,1) 0%, rgba(0,0,0,1) 100%);
+            transition: opacity 0.5s ease, visibility 0.5s;
         }
-        
-        .fullscreen-active .btn-fullscreen i:before {
-            content: "\f00d";
+
+        .hub-title {
+            font-size: 3.5rem;
+            font-weight: 800;
+            margin-bottom: 2rem;
+            background: linear-gradient(to right, #63b3ed, #68d391);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            letter-spacing: -1px;
         }
-        
-        @media (max-width: 768px) {
-            .btn {
-                min-width: 100%;
-            }
-            
-            .game-frame {
-                height: 500px;
-            }
-            
-            h1 {
-                font-size: 2.2rem;
-            }
-            
-            .status-bar {
-                flex-direction: column;
-                align-items: flex-start;
-            }
-        }
-        
-        @media (max-width: 480px) {
-            .game-frame {
-                height: 400px;
-            }
-            
-            h1 {
-                font-size: 1.8rem;
-            }
-            
-            .container {
-                padding: 10px;
-            }
-        }
-        
-        .file-notice {
-            background-color: rgba(245, 101, 101, 0.1);
-            border: 1px solid #fc8181;
-            border-radius: 10px;
-            padding: 15px;
-            margin-bottom: 25px;
+
+        .btn-huge {
+            padding: 22px 64px;
+            font-size: 1.6rem;
+            font-weight: 700;
+            border-radius: 50px;
+            border: none;
+            background: white;
+            color: black;
+            cursor: pointer;
             display: flex;
             align-items: center;
             gap: 15px;
+            transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 0 40px rgba(255,255,255,0.15);
         }
-        
-        .file-notice i {
-            font-size: 1.8rem;
-            color: #fc8181;
+
+        .btn-huge:hover {
+            transform: scale(1.05);
+            box-shadow: 0 0 60px rgba(99, 179, 237, 0.3);
         }
+
+        /* Slim Dynamic Island */
+        .dynamic-island-container {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            z-index: 1000;
+        }
+
+        .dynamic-island {
+            background: var(--island-bg);
+            backdrop-filter: blur(25px);
+            -webkit-backdrop-filter: blur(25px);
+            border: 1px solid var(--island-border);
+            border-radius: 24px;
+            padding: 0 12px;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+            width: 120px; /* Slim base */
+            height: 34px; /* Slim base */
+            overflow: hidden;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.8);
+        }
+
+        .dynamic-island:hover {
+            width: 300px;
+            height: 380px; /* Expanded for notepad */
+            border-radius: 20px;
+            padding: 14px;
+        }
+
+        .island-header {
+            display: flex;
+            align-items: center;
+            height: 34px;
+            min-height: 34px;
+            gap: 8px;
+            white-space: nowrap;
+        }
+
+        .status-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 50%;
+            background-color: #4a5568;
+        }
+
+        .status-dot.online { background-color: var(--accent-green); box-shadow: 0 0 8px var(--accent-green); }
+        .status-dot.loading { background-color: var(--accent-yellow); animation: pulse 1s infinite; }
+
+        #statusText {
+            font-size: 0.7rem;
+            font-weight: 700;
+            letter-spacing: 0.5px;
+            opacity: 0.8;
+            text-transform: uppercase;
+        }
+
+        /* Expansion Content */
+        .island-body {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-top: 12px;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+            height: 100%;
+        }
+
+        .dynamic-island:hover .island-body {
+            opacity: 1;
+        }
+
+        .island-controls {
+            display: flex;
+            gap: 6px;
+        }
+
+        .btn-mini {
+            flex: 1;
+            background: rgba(255, 255, 255, 0.08);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            color: white;
+            padding: 8px;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 5px;
+            transition: 0.2s;
+        }
+
+        .btn-mini:hover {
+            background: rgba(255, 255, 255, 0.15);
+        }
+
+        /* Notepad Section */
+        .notepad-area {
+            display: flex;
+            flex-direction: column;
+            flex-grow: 1;
+            gap: 8px;
+        }
+
+        .notepad-label {
+            font-size: 0.65rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            opacity: 0.4;
+            display: flex;
+            justify-content: space-between;
+        }
+
+        #notepad {
+            width: 100%;
+            flex-grow: 1;
+            background: rgba(0, 0, 0, 0.3);
+            border: 1px solid rgba(255, 255, 255, 0.05);
+            border-radius: 12px;
+            color: #e2e8f0;
+            padding: 10px;
+            font-size: 0.85rem;
+            resize: none;
+            outline: none;
+            line-height: 1.4;
+        }
+
+        #notepad:focus {
+            border-color: var(--accent-blue);
+        }
+
+        /* Loading Overlay */
+        .full-loader {
+            position: fixed;
+            inset: 0;
+            background: #000;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            z-index: 500;
+            transition: opacity 0.6s ease;
+        }
+
+        .spinner-ring {
+            width: 50px;
+            height: 50px;
+            border: 3px solid rgba(99, 179, 237, 0.1);
+            border-top-color: var(--accent-blue);
+            border-radius: 50%;
+            animation: spin 0.8s linear infinite;
+        }
+
+        @keyframes spin { to { transform: rotate(360deg); } }
+        @keyframes pulse {
+            0% { opacity: 1; }
+            50% { opacity: 0.4; }
+            100% { opacity: 1; }
+        }
+
+        .hidden { display: none !important; }
     </style>
 </head>
 <body>
-    <div class="container">
-        <header>
-            <h1><i class="fas fa-cube"></i> Eaglercraft 1.12.2 Launcher</h1>
-            <p class="subtitle">Offline Minecraft 1.12.2 client that runs directly in your browser</p>
-        </header>
-        
-        <div class="file-notice">
-            <i class="fas fa-exclamation-circle"></i>
-            <div>
-                <strong>Important:</strong> Make sure the file "Eaglercraft 1.12.2 Offline.html" is in the same folder as this launcher. If it's in a different location, update the iframe source below.
-            </div>
-        </div>
-        
-        <div class="launcher-card">
-            <div class="controls">
-                <button class="btn btn-launch" id="launchBtn">
-                    <i class="fas fa-play-circle"></i> Launch Eaglercraft
-                </button>
-                <button class="btn btn-fullscreen" id="fullscreenBtn">
-                    <i class="fas fa-expand"></i> Toggle Fullscreen
-                </button>
-                <button class="btn btn-refresh" id="refreshBtn">
-                    <i class="fas fa-redo"></i> Refresh Game
-                </button>
+
+    <!-- Central Hub -->
+    <div id="centralHub">
+        <h1 class="hub-title">Atlas Launcher</h1>
+        <button class="btn-huge" id="mainLaunchBtn">
+            <i class="fas fa-play"></i> LAUNCH GAME
+        </button>
+        <p style="margin-top: 20px; opacity: 0.4; font-size: 0.85rem; letter-spacing: 1px;">BROWSER-BASED MINECRAFT</p>
+    </div>
+
+    <!-- Slim Island -->
+    <div class="dynamic-island-container">
+        <div class="dynamic-island" id="island">
+            <div class="island-header">
+                <div id="statusDot" class="status-dot"></div>
+                <span id="statusText">READY</span>
             </div>
             
-            <div class="game-container">
-                <div class="loader" id="loader">
-                    <div class="spinner"></div>
-                    <p>Loading Eaglercraft 1.12.2...</p>
+            <div class="island-body">
+                <div class="island-controls">
+                    <button class="btn-mini" id="refreshBtn">
+                        <i class="fas fa-sync-alt"></i> REFRESH
+                    </button>
+                    <button class="btn-mini" id="fullscreenBtn">
+                        <i class="fas fa-expand"></i> FS
+                    </button>
                 </div>
-                
-                <iframe 
-                    class="game-frame" 
-                    id="gameFrame"
-                    src="about:blank"
-                    allow="fullscreen"
-                    title="Eaglercraft 1.12.2 Minecraft Client">
-                </iframe>
-            </div>
-            
-            <div class="status-bar">
-                <div class="status-item">
-                    <span class="status-icon online"><i class="fas fa-circle"></i></span>
-                    <div>
-                        <div>Status: <span id="statusText">Ready to launch</span></div>
-                        <div class="subtitle" style="font-size: 0.9rem;">Eaglercraft 1.12.2 Offline</div>
+
+                <div class="notepad-area">
+                    <div class="notepad-label">
+                        <span>Notes</span>
+                        <span id="saveIndicator" style="display: none;">Saved</span>
                     </div>
-                </div>
-                <div class="status-item">
-                    <span class="status-icon"><i class="fas fa-info-circle"></i></span>
-                    <div>
-                        <div>Controls: WASD to move, E for inventory</div>
-                        <div class="subtitle" style="font-size: 0.9rem;">Mouse to look around</div>
-                    </div>
+                    <textarea id="notepad" placeholder="Type coordinates or server IPs here..."></textarea>
                 </div>
             </div>
-        </div>
-        
-        <div class="instructions">
-            <h3><i class="fas fa-info-circle"></i> How to Use</h3>
-            <ul>
-                <li>Click "Launch Eaglercraft" to load the game in the frame above.</li>
-                <li>Use "Toggle Fullscreen" for an immersive gaming experience.</li>
-                <li>If the game doesn't load properly, try the "Refresh Game" button.</li>
-                <li>Make sure the file "Eaglercraft 1.12.2 Offline.html" is in the same directory as this launcher.</li>
-                <li>If you have the file in a different location, you'll need to update the iframe source in the JavaScript section.</li>
-            </ul>
         </div>
     </div>
 
+    <!-- Loader -->
+    <div id="loader" class="full-loader hidden">
+        <div class="spinner-ring"></div>
+    </div>
+
+    <!-- Frame -->
+    <iframe 
+        id="gameFrame" 
+        class="game-frame" 
+        src="about:blank" 
+        allow="fullscreen; autoplay; gamepad; microphone;"
+        title="Eaglercraft">
+    </iframe>
+
     <script>
-        document.addEventListener('DOMContentLoaded', function() {
-            // Get elements
+        document.addEventListener('DOMContentLoaded', () => {
             const gameFrame = document.getElementById('gameFrame');
-            const launchBtn = document.getElementById('launchBtn');
+            const mainLaunchBtn = document.getElementById('mainLaunchBtn');
+            const centralHub = document.getElementById('centralHub');
             const fullscreenBtn = document.getElementById('fullscreenBtn');
             const refreshBtn = document.getElementById('refreshBtn');
             const loader = document.getElementById('loader');
             const statusText = document.getElementById('statusText');
-            const gameContainer = document.querySelector('.game-container');
-            
-            // Game file name - CHANGE THIS IF YOUR FILE IS NAMED DIFFERENTLY OR IN A SUBFOLDER
+            const statusDot = document.getElementById('statusDot');
+            const notepad = document.getElementById('notepad');
+            const saveIndicator = document.getElementById('saveIndicator');
+
             const gameFileName = "1122.html";
+
+            // Notepad Logic
+            notepad.value = localStorage.getItem('eagler_notes') || "";
             
-            // Launch the game
-            launchBtn.addEventListener('click', function() {
-                statusText.textContent = "Loading game...";
-                statusText.style.color = "#ecc94b";
-                loader.style.display = 'block';
+            let saveTimeout;
+            notepad.addEventListener('input', () => {
+                clearTimeout(saveTimeout);
+                saveIndicator.style.display = 'inline';
+                saveIndicator.textContent = "Typing...";
                 
-                // Set the iframe source to the Eaglercraft file
+                saveTimeout = setTimeout(() => {
+                    localStorage.setItem('eagler_notes', notepad.value);
+                    saveIndicator.textContent = "Saved";
+                    setTimeout(() => { saveIndicator.style.display = 'none'; }, 1000);
+                }, 500);
+            });
+
+            function setStatus(state) {
+                switch(state) {
+                    case 'ready':
+                        statusText.textContent = "READY";
+                        statusDot.className = "status-dot";
+                        break;
+                    case 'loading':
+                        statusText.textContent = "LOADING";
+                        statusDot.className = "status-dot loading";
+                        loader.classList.remove('hidden');
+                        break;
+                    case 'playing':
+                        statusText.textContent = "PLAYING";
+                        statusDot.className = "status-dot online";
+                        loader.classList.add('hidden');
+                        centralHub.classList.add('hidden');
+                        break;
+                }
+            }
+
+            function launch() {
+                setStatus('loading');
                 gameFrame.src = gameFileName;
-                
-                // When the iframe loads
-                gameFrame.onload = function() {
-                    loader.style.display = 'none';
-                    statusText.textContent = "Game loaded - Enjoy!";
-                    statusText.style.color = "#68d391";
-                    
-                    // Focus the iframe for keyboard controls
-                    gameFrame.contentWindow.focus();
-                };
-                
-                // If there's an error loading
-                gameFrame.onerror = function() {
-                    loader.style.display = 'none';
-                    statusText.textContent = "Error loading game. Check file location.";
-                    statusText.style.color = "#fc8181";
-                    
-                    // Show alert with troubleshooting tips
-                    setTimeout(function() {
-                        alert(`Could not load ${gameFileName}. Please ensure:\n\n1. The file exists in the same folder as this launcher\n2. The filename is exactly "${gameFileName}"\n3. If the file is in a subfolder, update the gameFileName variable in the JavaScript.`);
+                gameFrame.onload = () => {
+                    setTimeout(() => {
+                        setStatus('playing');
+                        try {
+                            gameFrame.contentWindow.focus();
+                        } catch(e) { console.log("Focus restricted by cross-origin policy"); }
                     }, 500);
                 };
+            }
+
+            mainLaunchBtn.addEventListener('click', launch);
+
+            refreshBtn.addEventListener('click', () => {
+                if (gameFrame.src !== "about:blank") launch();
             });
-            
-            // Toggle fullscreen
-            fullscreenBtn.addEventListener('click', function() {
-                document.body.classList.toggle('fullscreen-active');
-                
-                if (document.body.classList.contains('fullscreen-active')) {
-                    // Focus the iframe when entering fullscreen
-                    gameFrame.contentWindow.focus();
-                }
-            });
-            
-            // Refresh the game
-            refreshBtn.addEventListener('click', function() {
-                if (gameFrame.src && gameFrame.src !== 'about:blank') {
-                    statusText.textContent = "Refreshing game...";
-                    statusText.style.color = "#ecc94b";
-                    loader.style.display = 'block';
-                    
-                    gameFrame.src = gameFrame.src;
+
+            fullscreenBtn.addEventListener('click', () => {
+                const docEl = document.documentElement;
+                if (!document.fullscreenElement && !document.webkitFullscreenElement) {
+                    // Modern API
+                    if (docEl.requestFullscreen) {
+                        docEl.requestFullscreen().catch(err => {
+                            console.error(`Error attempting to enable full-screen mode: ${err.message}`);
+                        });
+                    } 
+                    // Older Webkit fallback (Safari/Chrome)
+                    else if (docEl.webkitRequestFullscreen) {
+                        docEl.webkitRequestFullscreen();
+                    }
                 } else {
-                    // If no game is loaded, launch it
-                    launchBtn.click();
+                    if (document.exitFullscreen) {
+                        document.exitFullscreen();
+                    } else if (document.webkitExitFullscreen) {
+                        document.webkitExitFullscreen();
+                    }
                 }
             });
-            
-            // Exit fullscreen with Escape key
-            document.addEventListener('keydown', function(event) {
-                if (event.key === 'Escape' && document.body.classList.contains('fullscreen-active')) {
-                    document.body.classList.remove('fullscreen-active');
-                }
-            });
-            
-            // Display initial status
-            statusText.textContent = "Ready to launch";
-            statusText.style.color = "#a0aec0";
+
+            // Prevent clicks inside notepad from stealing focus from game unnecessarily
+            notepad.addEventListener('mousedown', (e) => e.stopPropagation());
         });
     </script>
 </body>
